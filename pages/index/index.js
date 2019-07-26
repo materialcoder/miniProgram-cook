@@ -11,7 +11,9 @@ Page({
     dataListM: [],
     titleM: '',
     dataListV: [],
-    titleV: ''
+    titleV: '',
+    selectedM: [],
+    selectedV: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -87,6 +89,37 @@ Page({
     }
   },
   selectMe: function(e) {
-    console.log(e.currentTarget.dataset.id)
+    console.log(e.currentTarget.dataset)
+    let data = e.currentTarget.dataset
+    let item = data.item
+    let type = data.type
+    let selectedM = this.data.selectedM
+    let selectedV = this.data.selectedV
+    let flag = false
+    if (type === 'meat') {
+      selectedM.map(d => {
+        if (d.id === item.id) {
+          flag = true
+        }
+      })
+    } else {
+      selectedV.map(d => {
+        if (d.id === item.id) {
+          flag = true
+        }
+      })
+    }
+    if (flag) return
+    if (type === 'meat') {
+      selectedM.push(item)
+    } else {
+      selectedV.push(item)
+    }
+    this.setData({
+      selectedM: selectedM,
+      selectedV: selectedV
+    })
+    wx.setStorageSync('selectedM', selectedM)
+    wx.setStorageSync('selectedV', selectedV)
   }
 })

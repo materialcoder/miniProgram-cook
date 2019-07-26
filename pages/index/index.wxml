@@ -12,7 +12,7 @@
     <view class="flex-wrp">
       <view class="flex-item" wx:for="{{dataListM}}" wx:key="{{item.id}}">
         <text class="text">{{item.name}}</text>
-        <button type="primary" size="mini" data-id="{{item.id}}" bindtap="selectMe">选我</button>
+        <button type="primary" size="mini" data-type="meat" data-item="{{item}}" bindtap="selectMe">选我</button>
       </view>
     </view>
   </view>
@@ -21,7 +21,7 @@
     <view class="flex-wrp">
       <view class="flex-item" wx:for="{{dataListV}}" wx:key="index">
         <text class="text">{{item.name}}</text>
-        <button type="primary" size="mini">选我</button>
+        <button type="primary" size="mini" data-type="vegetables" data-item="{{item}}" bindtap="selectMe">选我</button>
       </view>
     </view>
   </view>
