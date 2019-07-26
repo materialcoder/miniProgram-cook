@@ -1,13 +1,28 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 欢迎进入'俺伯的御膳房' </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
+  </view> -->
+  <view class="section">
+    <text class="section-title">{{titleM}}</text>
+    <view class="flex-wrp">
+      <view class="flex-item" wx:for="{{dataListM}}" wx:key="{{item.id}}">
+        <text class="text">{{item.name}}</text>
+        <button type="primary" size="mini" data-id="{{item.id}}" bindtap="selectMe">选我</button>
+      </view>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="section">
+    <text class="section-title">{{titleV}}</text>
+    <view class="flex-wrp">
+      <view class="flex-item" wx:for="{{dataListV}}" wx:key="index">
+        <text class="text">{{item.name}}</text>
+        <button type="primary" size="mini">选我</button>
+      </view>
+    </view>
   </view>
 </view>
