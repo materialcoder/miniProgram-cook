@@ -1,1 +1,41 @@
 /* pages/list/list.wxss */
+
+.empty {
+  margin-top: 50%;
+  color: #3A968E;
+}
+
+.empty .iconfont{
+  font-size: 64rpx;
+  margin-bottom: 30rpx;
+}
+
+.section {
+  width: 92%;
+  margin-left: 5%;
+  margin-bottom: 20px;
+  margin-right: 3%;
+}
+
+.section-title {
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 0 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.item-img {
+  width: 80px;
+  height: 80px;
+}
+
+.item-name {
+  line-height: 80px;
+  margin-left: 40rpx;
+}

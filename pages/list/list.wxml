@@ -1,10 +1,22 @@
 <!-- list.wxml -->
 
-<view class="container log-list">
-  <block wx:for="{{selectedM}}" wx:key="{{item.id}}">
-    <text class="log-item">{{index + 1}}. {{item.name}}</text>
-  </block>
-  <block wx:for="{{selectedV}}" wx:key="{{item.id}}">
-    <text class="log-item">{{index + 1}}. {{item.name}}</text>
-  </block>
+<view wx:if="{{selectedM.length === 0 && selectedV.length === 0}}" class="container empty">
+  <text class="icon-frown iconfont"></text>
+  <text>啥也没有哦~</text>
+</view>
+<view wx:else class="container">
+  <view class="section">
+    <text class="section-title">肉肉</text>
+    <view class="item" wx:for="{{selectedM}}" wx:key="{{item.id}}">
+      <image class="item-img" src="{{item.picUrl}}"></image>
+      <text class="item-name">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="section">
+    <text class="section-title">菜菜</text>
+    <view class="item" wx:for="{{selectedV}}" wx:key="{{item.id}}">
+      <image class="item-img" src="{{item.picUrl}}"></image>
+      <text class="item-name">{{item.name}}</text>
+    </view>
+  </view>
 </view>

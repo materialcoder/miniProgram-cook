@@ -11,8 +11,10 @@
     <text class="section-title">{{titleM}}</text>
     <view class="flex-wrp">
       <view class="flex-item" wx:for="{{dataListM}}" wx:key="{{item.id}}">
+        <image class="item-pic" src="{{item.picUrl}}"></image>
         <text class="text">{{item.name}}</text>
-        <button type="primary" size="mini" data-type="meat" data-item="{{item}}" bindtap="selectMe">选我</button>
+        <button wx:if="{{item.selected}}" type="warn" size="mini" data-type="meat" data-index="{{index}}" data-item="{{item}}" bindtap="cancelMe">取消</button>
+        <button wx:else type="primary" size="mini" data-type="meat" data-index="{{index}}" data-item="{{item}}" bindtap="selectMe">选我</button>
       </view>
     </view>
   </view>
@@ -20,8 +22,10 @@
     <text class="section-title">{{titleV}}</text>
     <view class="flex-wrp">
       <view class="flex-item" wx:for="{{dataListV}}" wx:key="index">
+        <image class="item-pic" src="{{item.picUrl}}"></image>
         <text class="text">{{item.name}}</text>
-        <button type="primary" size="mini" data-type="vegetables" data-item="{{item}}" bindtap="selectMe">选我</button>
+        <button wx:if="{{item.selected}}" type="warn" size="mini" data-type="vegetables" data-index="{{index}}" data-item="{{item}}" bindtap="cancelMe">取消</button>
+        <button wx:else type="primary" size="mini" data-type="vegetables" data-index="{{index}}" data-item="{{item}}" bindtap="selectMe">选我</button>
       </view>
     </view>
   </view>

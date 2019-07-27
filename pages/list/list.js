@@ -5,10 +5,12 @@ Page({
     selectedV: [],
     selectedM: []
   },
-  onLoad: function () {
+  onShow: function () {
     this.setData({
       selectedV: wx.getStorageSync('selectedV') || [],
       selectedM: wx.getStorageSync('selectedM') || []
     })
+  },
+  onHide: function () {
   }
 })

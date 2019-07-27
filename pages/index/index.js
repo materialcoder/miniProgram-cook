@@ -48,6 +48,19 @@ Page({
     //     }
     //   })
     // }
+    this.getData()
+  },
+  onPullDownRefresh: function() {
+    wx.showNavigationBarLoading()
+    // wx.startPullDownRefresh()
+    this.getData()
+    
+  },
+  getData: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.request({
       url: 'https://www.easy-mock.com/mock/5d36f92436db4945c40fc475/cook/list',
       data: {
@@ -72,6 +85,11 @@ Page({
           titleV: '清淡养生',
           dataListV: res.data.data
         })
+      },
+      complete: res => {
+        wx.hideLoading()
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
       }
     })
   },
@@ -90,32 +108,61 @@ Page({
   },
   selectMe: function(e) {
     console.log(e.currentTarget.dataset)
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '选好了',
+    // })
     let data = e.currentTarget.dataset
     let item = data.item
     let type = data.type
+    let index = data.index
     let selectedM = this.data.selectedM
     let selectedV = this.data.selectedV
-    let flag = false
+    let dataListM = this.data.dataListM
+    let dataListV = this.data.dataListV
     if (type === 'meat') {
-      selectedM.map(d => {
-        if (d.id === item.id) {
-          flag = true
-        }
-      })
-    } else {
-      selectedV.map(d => {
-        if (d.id === item.id) {
-          flag = true
-        }
-      })
-    }
-    if (flag) return
-    if (type === 'meat') {
+      item.selected = true
+      dataListM.splice(index, 1, item)
       selectedM.push(item)
     } else {
+      item.selected = true
+      dataListV.splice(index, 1, item)
       selectedV.push(item)
     }
     this.setData({
+      dataListM: dataListM,
+      dataListV: dataListV,
+      selectedM: selectedM,
+      selectedV: selectedV
+    })
+    wx.setStorageSync('selectedM', selectedM)
+    wx.setStorageSync('selectedV', selectedV)
+  },
+  cancelMe: function (e) {
+    console.log(e.currentTarget.dataset)
+    let data = e.currentTarget.dataset
+    let item = data.item
+    let type = data.type
+    let index = data.index
+    let selectedM = this.data.selectedM
+    let selectedV = this.data.selectedV
+    let dataListM = this.data.dataListM
+    let dataListV = this.data.dataListV
+    let sIndex
+    if (type === 'meat') {
+      item.selected = false
+      dataListM.splice(index, 1, item)
+      sIndex = selectedM.findIndex(i => i.id === item.id)
+      selectedM.splice(sIndex, 1)
+    } else {
+      item.selected = false
+      dataListV.splice(index, 1, item)
+      sIndex = selectedV.findIndex(i => i.id === item.id)
+      selectedV.splice(sIndex, 1)
+    }
+    this.setData({
+      dataListM: dataListM,
+      dataListV: dataListV,
       selectedM: selectedM,
       selectedV: selectedV
     })
